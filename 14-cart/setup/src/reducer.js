@@ -34,10 +34,13 @@ const reducer = (state, action) => {
       return { ...state, total: 0, amount: 0 };
     }
 
-    const { total, amount } = state.cart.reduce(
+    let { total, amount } = state.cart.reduce(
       (cartTotal, cartItem) => {
         const { price, amount } = cartItem;
+        const itemTotal = price * amount;
+
         cartTotal.amount += amount;
+        cartTotal.total += itemTotal;
         return cartTotal;
       },
       {
@@ -45,6 +48,7 @@ const reducer = (state, action) => {
         amount: 0,
       }
     );
+    total = parseFloat(total.toFixed(2));
 
     return { ...state, total, amount };
   }
