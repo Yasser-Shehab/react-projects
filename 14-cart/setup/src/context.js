@@ -43,7 +43,9 @@ const AppProvider = ({ children }) => {
   }, [data, fetchCartItems]);
 
   useEffect(() => {
-    dispatch({ type: 'GET_TOTALS' });
+    if (state.cart) {
+      dispatch({ type: 'GET_TOTALS' });
+    }
   }, [state.cart]);
 
   return (
