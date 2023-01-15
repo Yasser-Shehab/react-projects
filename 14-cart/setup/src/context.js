@@ -35,8 +35,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'DECREASE', payload: id });
   };
   const fetchCartItems = useCallback(() => {
+    dispatch({ type: 'LOADING' });
     dispatch({ type: 'FETCH_CART', payload: data });
   }, [data]);
+
+  const toggleAmount = (id, type) => {
+    dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } });
+  };
 
   useEffect(() => {
     fetchCartItems();
@@ -57,6 +62,7 @@ const AppProvider = ({ children }) => {
         increaseItem,
         decreaseItem,
         fetchCartItems,
+        toggleAmount,
       }}
     >
       {children}
